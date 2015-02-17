@@ -13,16 +13,23 @@ public class MainWindow extends JFrame {
 
         // Configure the window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
         positionWindow();
 
 
-        setLayout(new GridLayout(3, 2));
-        add(new Button("1"));
-        add(new Button("2"));
-        add(new Button("3"));
-        add(new Button("4"));
-        add(new Button("5"));
-        add(new Button("6"));
+        getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+
+        JPanel[] panels = new JPanel[3];
+        int j = 1;
+        for (int i = 0; i < panels.length; i++) {
+            panels[i] = new JPanel();
+            panels[i].setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+            panels[i].setLayout(new BoxLayout(panels[i], BoxLayout.X_AXIS));
+            for (int k = 0; k < 2; k++) {
+                panels[i].add(new JButton(String.valueOf(j++)));
+            }
+            add(panels[i]);
+        }
 
         pack();
     }
